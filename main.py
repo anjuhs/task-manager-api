@@ -55,3 +55,7 @@ def delete_task(task_id: int, db: Session = Depends(get_db)):
     db.commit()
     
     return {"message": "Task deleted successfully"}
+
+@app.get("/")
+def home():
+    return {"message": "Task Manager API is live 🚀"}
