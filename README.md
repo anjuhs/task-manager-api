@@ -1,32 +1,52 @@
-# Task Manager API
+# 🚀 Task Manager API
 
-A simple REST API built using FastAPI to manage tasks with priority and completion status.
+A fully functional RESTful backend application built using FastAPI with SQLite database integration and deployed on Render.
 
-## Features
-- Create tasks
-- View all tasks
-- Update tasks
-- Delete tasks
-- Persistent storage using SQLite
-- Track priority and completion status
+## 🌐 Live Demo
 
-## API Endpoints
-- GET /tasks
-- POST /tasks
-- PUT /tasks/{id}
-- DELETE /tasks/{id}
+👉 https://task-manager-api-zayg.onrender.com/docs
 
-## Tech Stack
-- Python
-- FastAPI
+## 📌 Features
 
-## How to Run
+* Create tasks with priority and status
+* View all tasks
+* Update tasks
+* Delete tasks
+* Persistent storage using SQLite database
+
+## 🛠 Tech Stack
+
+* Python
+* FastAPI
+* SQLAlchemy
+* SQLite
+* Uvicorn
+* Render (Deployment)
+
+## ⚙️ API Endpoints
+
+* GET / → Check API status
+* GET /tasks → Get all tasks
+* POST /tasks → Create new task
+* PUT /tasks/{id} → Update task
+* DELETE /tasks/{id} → Delete task
+
+## ▶️ Run Locally
 
 ```bash
-pip install fastapi uvicorn
+git clone https://github.com/anjuhs/task-manager-api.git
+cd task-manager-api
+pip install -r requirements.txt
 uvicorn main:app --reload
+```
 
+## 📷 API Preview
 
+Visit `/docs` for interactive Swagger UI.
 
+## 💡 Highlights
 
-
+* Designed RESTful architecture
+* Implemented CRUD operations
+* Integrated relational database (SQLite)
+* Deployed to production using Render
