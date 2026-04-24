@@ -1,24 +1,27 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+from database import SessionLocal, engine
+import models
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-tasks = []
-
-class Task(BaseModel):
-    title: str
-    completed: bool = False
-    priority: str
-
-@app.get("/")
-def home():
-    return {"message": "Task Manager API is running"}
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @app.post("/tasks")
-def create_task(task: Task):
-    tasks.append(task)
-    return {"message": "Task added", "task": task}
+def create_task(title: str, priority: str, db: Session = Depends(get_db)):
+    task = models.Task(title=title, priority=priority)
+    db.add(task)
+    db.commit()
+    db.refresh(task)
+    return task
 
 @app.get("/tasks")
-def get_tasks():
-    return tasks
+def get_tasks(db: Session = Depends(get_db)):
+    return db.query(models.Task).all()
